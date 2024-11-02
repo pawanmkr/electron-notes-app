@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Electron Notes App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+      body {
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #333;
+      }
+
+      /* container styling */
+      #container {
+        display: flex;
+        width: 800px;
+        height: 500px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+      }
+
+      /* note list styling */
+      #notesList {
+        width: 30%;
+        background-color: #3a3a4a;
+        color: white;
+        padding: 20px;
+        overflow-y: auto;
+      }
+      #notesList h2 {
+        margin-bottom: 15px;
+        font-size: 20px;
+        text-align: center;
+      }
+      #notes {
+        list-style: none;
+      }
+      #notes li {
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      #notes li:hover {
+        background-color: #4c4c63;
+      }
+      #notes li.selected {
+        background-color: #565676;
+      }
+
+      /* note area styling */
+      #noteArea {
+        width: 70%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      #noteContent {
+        flex-grow: 1;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: none;
+        font-size: 16px;
+        background-color: #f9f9fb;
+      }
+      #saveButton {
+        margin-top: 15px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #3a8ef8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      #saveButton:hover {
+        background-color: #337fde;
+      }
+
+      /* note title input styling */
+      #noteTitle {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      /* save button with icon */
+      #saveButton i {
+        margin-right: 5px;
+      }
+
+      /* toast Notification */
+      #toast {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      #toast.show {
+        display: block;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="notesList">
+        <h2><i class="fas fa-sticky-note"></i> My Notes</h2>
+        <ul id="notes"></ul>
+      </div>
+      <div id="noteArea">
+        <!-- title input field for note title -->
+        <input type="text" id="noteTitle" placeholder="Enter note title..." />
+        <textarea
+          id="noteContent"
+          rows="10"
+          placeholder="Write your note here..."
+        ></textarea>
+        <button id="saveButton"><i class="fas fa-save"></i> Save</button>
+
+        <!-- toast notification -->
+        <div id="toast" style="display: none">Note saved!</div>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+</html>
